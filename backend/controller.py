@@ -5,7 +5,7 @@ configurations set in config.py file.
 '''
 
 from boto3 import resource
-import config
+import backend.config as config
 
 AWS_ACCESS_KEY_ID = config.AWS_ACCESS_KEY_ID
 AWS_SECRET_ACCESS_KEY = config.AWS_SECRET_ACCESS_KEY
