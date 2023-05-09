@@ -1,0 +1,16 @@
+.subtitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 600px;
+    min-height: 50px;
+    padding: 16px;
+}
+
+.subtitle > .subtitle-text{
+    font-size: 24px;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+    margin: 0px;
+}
