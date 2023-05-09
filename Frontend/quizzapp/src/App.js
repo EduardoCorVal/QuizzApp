@@ -1,11 +1,11 @@
 import './App.css';
+import Register from './pages/Register';
 
-import Feedback from './components/Feedback';
 
 function App() {
   return (
     <div className="App">
-      <Feedback/>
+      <Register />
     </div>
   );
 }
