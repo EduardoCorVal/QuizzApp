@@ -1,11 +1,11 @@
 import './App.css';
 
-import Subtitle from './components/Subtitle';
+import Feedback from './components/Feedback';
 
 function App() {
   return (
     <div className="App">
-      <Subtitle text="QuizApp"/>
+      <Feedback/>
     </div>
   );
 }
