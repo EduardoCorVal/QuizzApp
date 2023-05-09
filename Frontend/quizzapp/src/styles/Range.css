@@ -1,0 +1,45 @@
+.Range {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+  }
+  
+  .Range label {
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333333;
+  }
+  
+  .Range input[type="range"] {
+    width: 100%;
+    height: 16px;
+    margin-bottom: 8px;
+    -webkit-appearance: none;
+    background-color: #ddd;
+    border-radius: 8px;
+  }
+  
+  .Range input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background-color: #1ab606;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .Range input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background-color: #1ab606;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .Range-value {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+  
