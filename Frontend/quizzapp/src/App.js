@@ -1,11 +1,12 @@
 import './App.css';
+import Register from './pages/Register';
 
-import Subtitle from './components/Subtitle';
+
 
 function App() {
   return (
     <div className="App">
-      <Subtitle text="QuizApp"/>
+      <Register />
     </div>
   );
 }
