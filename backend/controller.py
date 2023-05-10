@@ -5,22 +5,26 @@ configurations set in config.py file.
 '''
 
 from boto3 import resource
-import backend.config as config
+import config as config
+import time
+from decimal import Decimal
 
 AWS_ACCESS_KEY_ID = config.AWS_ACCESS_KEY_ID
 AWS_SECRET_ACCESS_KEY = config.AWS_SECRET_ACCESS_KEY
+AWS_SESSION_TOKEN = config.AWS_SESSION_TOKEN
 REGION_NAME = config.REGION_NAME
 
-dynamodb_resource = resource(
-    'dynamodb',
+dynamodb_client = resource(
+    service_name='dynamodb',
     aws_access_key_id=AWS_ACCESS_KEY_ID,
     aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+    aws_session_token=AWS_SESSION_TOKEN,
     region_name=REGION_NAME
 )
 
 
 def create_table_user():
-    table = dynamodb_resource.create_table(
+    table = dynamodb_client.create_table(
         TableName='UserQuizzApp',  # Name of the table
         KeySchema=[
             {
@@ -42,10 +46,11 @@ def create_table_user():
     return table
 
 
-UserTable = dynamodb_resource.Table('UserQuizzApp')
+UserTable = dynamodb_client.Table('UserQuizzApp')
 
 
-def write_to_user(id, name, points):
+def write_to_user(name, points):
+    id = Decimal(str(time.time()).replace('.', ''))
     response = UserTable.put_item(
         Item={
             'id': id,
