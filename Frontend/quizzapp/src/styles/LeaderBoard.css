@@ -1,0 +1,21 @@
+table {
+    border: 5px solid #117504;
+    border-radius: 15px;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    margin-bottom: 100px;
+  }
+
+.column {
+    font-weight: bold;
+}
+
+.odd {
+    background-color: rgba(128, 128, 128, 0.488);
+}
+
+.even {
+    background-color: #1bb60681;
+}
