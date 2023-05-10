@@ -20,7 +20,7 @@ def root_route():
 def add_user():
     data = request.get_json()
     response = dynamodb.write_to_user(
-        data['id'], data['name'], data['points'])
+        data['name'], data['points'])
     if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
         return {
             'msg': 'Added successfully',
