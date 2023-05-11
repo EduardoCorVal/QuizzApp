@@ -24,8 +24,12 @@ const Register = (props) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const questions = await axios.get('http://127.0.0.1:5000/getAllQuestions', {});
-        setQuestions(questions.data.Items);
+        const getQuestions = await axios.get('http://127.0.0.1:5000/getAllQuestions');
+        let questions = [];
+        for (let i = 0; i < numQuestions; i++) {
+          questions.push(getQuestions.data.Items[i]);
+        }
+        setQuestions(questions);
         setUser(user);
         props.setPage(props.page+1)
     };

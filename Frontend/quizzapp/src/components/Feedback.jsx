@@ -3,7 +3,13 @@ import '../styles/Feedback.css';
 
 function Feedback(props) {
     const handleOnClick = () => {
-        props.setModal(!props.modal); 
+        if (props.indexQ - 1 < 0) {
+            props.setPage(props.page + 1);
+        }
+        else {
+            props.setIndexQ(props.indexQ - 1);
+            props.setModal(!props.modal); 
+        }
     }
 
   return (

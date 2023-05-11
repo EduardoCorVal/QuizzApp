@@ -1,15 +1,14 @@
 import Header from "../components/Header";
 import Question from "../components/Question";
 
-import React, { Fragment, useContext } from 'react'
-import { UserContext } from '../App'
+import React, { Fragment} from 'react'
 
 
-function Questions() {
+function Questions(props) {
   return (
     <Fragment>
       <Header />
-      <Question />
+      <Question page={props.page} setPage={props.setPage}/>
     </Fragment>
   )
 }
