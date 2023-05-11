@@ -4,20 +4,36 @@ import Header from "./components/Header";
 import Question from "./components/Question";
 import Subtitle from "./components/Subtitle";
 import Ejemplo from "./images/ejemplo.png"
+import LeaderBoard from "./components/LeaderBoard";
+import FinalScore from "./pages/FinalScore";
+
 
 function App() {
+
+  const user = 
+    {
+      name: "Paulo",
+      score: 20
+    }
+  const arrUsers = [
+    {
+        name: "Jose Luis",
+        score: 100
+    },
+    {
+        name: "Angel",
+        score: 80
+    },
+    {
+        name: "Eduardo",
+        score: 70
+    }
+  ]
   return (
     <div className="App">
-      <Header />
-      <Question
-        question="What is the capital of India?"
-        image={Ejemplo}
-        option1="Mumbai"
-        option2="Delhi"
-        option3="Kolkata"
-        option4="Chennai"
-        answer="Delhi"
-      />
+      <FinalScore
+      boardUsers = {arrUsers}
+      actualUser = {user}/>
     </div>
   );
 }
