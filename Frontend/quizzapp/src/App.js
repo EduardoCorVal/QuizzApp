@@ -1,23 +1,23 @@
+import { createContext, useState } from "react";
+import AppContext from "./components/AppContext";
+/* Main Style */
 import "./App.css";
+
+/* Pages */
 import Register from "./pages/Register";
-import Header from "./components/Header";
-import Question from "./components/Question";
-import Subtitle from "./components/Subtitle";
-import Ejemplo from "./images/ejemplo.png"
+import Questions from "./pages/Questions";
+
+export const UserContext = createContext();
 
 function App() {
+  const [page, setPage] = useState(0);
+  const pages = [<Register page={page} setPage={setPage}/>, <Questions/>];
+
   return (
     <div className="App">
-      <Header />
-      <Question
-        question="What is the capital of India?"
-        image={Ejemplo}
-        option1="Mumbai"
-        option2="Delhi"
-        option3="Kolkata"
-        option4="Chennai"
-        answer="Delhi"
-      />
+      <AppContext>
+        {pages[page]}
+      </AppContext>
     </div>
   );
 }

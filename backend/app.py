@@ -1,7 +1,9 @@
 from flask import Flask, request
 import controller as dynamodb
+from flask_cors import CORS as CORS
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 @app.route('/test')
