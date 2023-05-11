@@ -10,12 +10,5 @@ table {
 
 .column {
     font-weight: bold;
-}
-
-.odd {
-    background-color: rgba(128, 128, 128, 0.488);
-}
-
-.even {
-    background-color: #1bb60681;
+    background-color: #1ab606;
 }

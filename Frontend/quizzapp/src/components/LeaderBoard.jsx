@@ -1,21 +1,17 @@
 import React from "react";
 import "../styles/LeaderBoard.css";
+import Row from "./Row";
 
 function LeaderBoard(props) {
     return (
         <div className="button-container">
-            <table>
+            <table id="leaderboard">
                 <tr className="column">LeaderBoard</tr>
-                <tr className="odd">{props.user1}</tr>
-                <tr className="even">{props.user2}</tr>
-                <tr className="odd">{props.user3}</tr>
-                <tr className="even">{props.user4}</tr>
-                <tr className="odd">{props.user5}</tr>
-                <tr className="even">{props.user6}</tr>
-                <tr className="odd">{props.user7}</tr>
-                <tr className="even">{props.user8}</tr>
-                <tr className="odd">{props.user9}</tr>
-                <tr className="even">{props.user10}</tr>
+                {props.arrUsuarios.map(user=>{
+                    return (<Row
+                    name = {user.name}
+                    score = {user.score}/>)
+                })}
             </table>
         </div>
 

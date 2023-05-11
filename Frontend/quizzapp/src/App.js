@@ -9,31 +9,31 @@ import FinalScore from "./pages/FinalScore";
 
 
 function App() {
+
+  const user = 
+    {
+      name: "Paulo",
+      score: 20
+    }
+  const arrUsers = [
+    {
+        name: "Jose Luis",
+        score: 100
+    },
+    {
+        name: "Angel",
+        score: 80
+    },
+    {
+        name: "Eduardo",
+        score: 70
+    }
+  ]
   return (
     <div className="App">
-      <FinalScore 
-      user = "Paulo"
-      score = "10"
-      user1 = "Jose Luis"
-      score1 = "100"
-      user2 = "Eduardo"
-      score2 = "100"
-      user3 = "Angel"
-      score3 = "100"
-      user4 = "Pablo"
-      score4 = "90"
-      user5 = "Aleny"
-      score5 = "80"
-      user6 = "Humbero Alumno"
-      score6 = "70"
-      user7 = "David"
-      score7 = "60"
-      user8 = "Christian"
-      score8 = "50"
-      user9 = "Jorge"
-      score9 = "40"
-      user10 = "Max"
-      score10 = "30"/>
+      <FinalScore
+      boardUsers = {arrUsers}
+      actualUser = {user}/>
     </div>
   );
 }
