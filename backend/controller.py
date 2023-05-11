@@ -47,6 +47,16 @@ def create_table_user():
 
 
 UserTable = dynamodb_client.Table('UserQuizzApp')
+QuestionsTable = dynamodb_client.Table('QuestionsQuizzApp')
+
+# Methods for Questions Table
+
+
+def read_questions():
+    response = QuestionsTable.response = QuestionsTable.scan()
+    return response
+
+# Methods for User Table
 
 
 def write_to_user(name, points):
@@ -61,20 +71,25 @@ def write_to_user(name, points):
     return response
 
 
-def read_from_user(name):
+def read_from_user(id):
     response = UserTable.get_item(
         Key={
-            'name': name,
+            'id': id,
         },
         ProjectionExpression='points'
     )
     return response
 
 
-def update_in_user(name, data):
+def read_users():
+    response = UserTable.response = UserTable.scan()
+    return response
+
+
+def update_in_user(id, data):
     response = UserTable.update_item(
         Key={
-            'name': name
+            'id': id
         },
         AttributeUpdates={
             'points': {
