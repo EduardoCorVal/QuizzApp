@@ -11,14 +11,7 @@ import Subtitle from "../components/Subtitle";
 const FinalScore = (props) => {
     const [user, setUser, , , score, setScore] = useContext(UserContext);
     const [users, setUsers] = useState(null);
-    const [post, setPost] = useState(false);
 
-    const postUser = async () => {
-        const result = await axios.post('http://127.0.0.1:5000/user', {
-            name: user,
-            points: score
-        });
-    };
 
     const getBoard = async () => { 
         const result = await axios.get('http://127.0.0.1:5000/getAllUsers');
@@ -28,10 +21,8 @@ const FinalScore = (props) => {
         });
         setUsers(newUsers);
     }
-    if (!post){
-        postUser();
-        getBoard();
-        setPost(true)
+    if (!users){
+        setTimeout(getBoard, 1000);
     }
 
 

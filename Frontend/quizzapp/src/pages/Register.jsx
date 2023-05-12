@@ -12,7 +12,7 @@ import axios from "axios";
 const Register = (props) => {
 
     const [user, setUser, , setQuestions] = useContext(UserContext);
-    const [numQuestions, setNumQuestions] = useState();
+    const [numQuestions, setNumQuestions] = useState(5);
 
     const handleChangeUsername = (event) => {
       setUser(event.target.value);
