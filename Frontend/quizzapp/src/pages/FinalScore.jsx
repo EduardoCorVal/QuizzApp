@@ -31,7 +31,7 @@ const FinalScore = (props) => {
     if (!post){
         postUser();
         getBoard();
-        setPost(true);
+        setPost(true)
     }
 
 
