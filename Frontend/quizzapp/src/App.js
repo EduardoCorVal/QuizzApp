@@ -1,39 +1,24 @@
+import { createContext, useState } from "react";
+import AppContext from "./components/AppContext";
+/* Main Style */
 import "./App.css";
+
+/* Pages */
 import Register from "./pages/Register";
-import Header from "./components/Header";
-import Question from "./components/Question";
-import Subtitle from "./components/Subtitle";
-import Ejemplo from "./images/ejemplo.png"
-import LeaderBoard from "./components/LeaderBoard";
+import Questions from "./pages/Questions";
 import FinalScore from "./pages/FinalScore";
 
+export const UserContext = createContext();
 
 function App() {
+  const [page, setPage] = useState(0);
+  const pages = [<Register page={page} setPage={setPage}/>, <Questions page={page} setPage={setPage}/>, <FinalScore page={page} setPage={setPage}/>];
 
-  const user = 
-    {
-      name: "Paulo",
-      score: 20
-    }
-  const arrUsers = [
-    {
-        name: "Jose Luis",
-        score: 100
-    },
-    {
-        name: "Angel",
-        score: 80
-    },
-    {
-        name: "Eduardo",
-        score: 70
-    }
-  ]
   return (
     <div className="App">
-      <FinalScore
-      boardUsers = {arrUsers}
-      actualUser = {user}/>
+      <AppContext>
+        {pages[page]}
+      </AppContext>
     </div>
   );
 }

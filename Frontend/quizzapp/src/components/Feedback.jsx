@@ -1,9 +1,27 @@
-import React, { Fragment} from 'react';
+import React, {useContext} from 'react';
+import { UserContext } from '../App';
+import axios from 'axios';
+
+
 import '../styles/Feedback.css';
 
+
 function Feedback(props) {
+    const [user, , , , score,] = useContext(UserContext);
     const handleOnClick = () => {
-        props.setModal(!props.modal); 
+        if (props.indexQ - 1 < 0) {
+            const postUser = async () => {
+                await axios.post('http://127.0.0.1:5000/user', {
+                    name: user,
+                    points: score
+                })}
+            postUser();
+            props.setPage(props.page + 1);
+        }
+        else {
+            props.setIndexQ(props.indexQ - 1);
+            props.setModal(!props.modal); 
+        }
     }
 
   return (
