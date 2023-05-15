@@ -34,10 +34,21 @@ def get_all_questions():
 
 # Routes for User Table
 
-
 @app.route('/getAllUsers', methods=['GET'])
 def get_all_users():
     response = dynamodb.read_users()
+    if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
+        if ('Items' in response):
+            return {'Items': response['Items']}
+        return {'msg': 'Item not found!'}
+    return {
+        'msg': 'Some error occured',
+        'response': response
+    }
+
+@app.route('/getTop10Users', methods=['GET'])
+def get_top_10_users():
+    response = dynamodb.get_top_10_users()
     if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
         if ('Items' in response):
             return {'Items': response['Items']}

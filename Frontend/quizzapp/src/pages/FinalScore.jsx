@@ -14,7 +14,7 @@ const FinalScore = (props) => {
 
 
     const getBoard = async () => { 
-        const result = await axios.get('http://127.0.0.1:5000/getAllUsers');
+        const result = await axios.get('http://127.0.0.1:5000/getTop10Users');
         const newUsers = [];
         result.data.Items.forEach((user) => {
             newUsers.push({name: user.name, score: user.points});

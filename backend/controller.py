@@ -8,6 +8,9 @@ from boto3 import resource
 import config as config
 import time
 from decimal import Decimal
+from operator import itemgetter
+from poolQuestions import items
+import random
 
 AWS_ACCESS_KEY_ID = config.AWS_ACCESS_KEY_ID
 AWS_SECRET_ACCESS_KEY = config.AWS_SECRET_ACCESS_KEY
@@ -22,6 +25,7 @@ dynamodb_client = resource(
     region_name=REGION_NAME
 )
 
+## Methods related to 'UserQuizzApp' table
 
 def create_table_user():
     table = dynamodb_client.create_table(
@@ -45,25 +49,15 @@ def create_table_user():
     )
     return table
 
-
 UserTable = dynamodb_client.Table('UserQuizzApp')
-QuestionsTable = dynamodb_client.Table('QuestionsQuizzApp')
-
-# Methods for Questions Table
-
-
-def read_questions():
-    response = QuestionsTable.response = QuestionsTable.scan()
-    return response
-
-# Methods for User Table
-
 
 def write_to_user(name, points):
     id = Decimal(str(time.time()).replace('.', ''))
     response = UserTable.put_item(
         Item={
-            'id': id,
+            # id generet is a timestamp kind of id. 
+            # So, numbers with higher values are newer
+            'id': id, 
             'name': name,
             'points': points,
         }
@@ -80,9 +74,21 @@ def read_from_user(id):
     )
     return response
 
-
 def read_users():
     response = UserTable.response = UserTable.scan()
+    return response
+
+
+def get_top_10_users():
+    response = UserTable.scan()
+    items = response['Items']
+    # Sort the items in the list descending by id. (The id itself is a timestamp)
+    items.sort(key=itemgetter('id'), reverse=True)
+    # Sort the items in the list descending by points
+    items.sort(key=itemgetter('points'), reverse=True)
+    # Get the top 10 items
+    top_10_items = items[:10]
+    response['Items'] = top_10_items
     return response
 
 
@@ -100,4 +106,54 @@ def update_in_user(id, data):
         },
         ReturnValues="UPDATED_NEW"  # returns the new updated values
     )
+    return response
+
+
+## Methods related to 'QuestionsQuizzApp' table
+
+def create_table_questions():
+    table = dynamodb_client.create_table(
+        TableName='QuestionsQuizzApp',
+        KeySchema=[
+            {
+                'AttributeName': 'id',
+                'KeyType': 'HASH' 
+            }
+        ],
+        AttributeDefinitions=[
+            {
+                'AttributeName': 'id',
+                'AttributeType': 'N'
+            }
+        ],
+        ProvisionedThroughput={
+            'ReadCapacityUnits': 10,
+            'WriteCapacityUnits': 10
+        }
+    )
+    return table
+
+QuestionsTable = dynamodb_client.Table('QuestionsQuizzApp')
+
+
+# Elements divided in lotes of 25 or less
+batch_size = 10
+batch_items = [items[i:i+batch_size] for i in range(0, len(items), batch_size)]
+
+# Insert each batch in the table using batch_write_item
+def insert_questions_table():
+    for batch in batch_items:
+        response = dynamodb_client.batch_write_item(
+            RequestItems={
+                'QuestionsQuizzApp': [
+                    {'PutRequest': {'Item': item}} for item in batch
+                ]
+            }
+        )
+    return response
+    
+def read_questions():
+    response = QuestionsTable.scan()
+    all_questions = response['Items']
+    random.shuffle(all_questions)
     return response
