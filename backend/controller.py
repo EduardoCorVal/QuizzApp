@@ -29,17 +29,17 @@ dynamodb_client = resource(
 
 def create_table_user():
     table = dynamodb_client.create_table(
-        TableName='UserQuizzApp',  # Name of the table
+        TableName='UserQuizzApp',  
         KeySchema=[
             {
                 'AttributeName': 'id',
-                'KeyType': 'HASH'  # HASH = partition key, RANGE = sort key
+                'KeyType': 'HASH'
             }
         ],
         AttributeDefinitions=[
             {
-                'AttributeName': 'id',  # Name of the attribute
-                'AttributeType': 'N'   # N = Number (S = String, B = Binary)
+                'AttributeName': 'id',
+                'AttributeType': 'N' 
             }
         ],
         ProvisionedThroughput={
@@ -135,23 +135,6 @@ def create_table_questions():
 
 QuestionsTable = dynamodb_client.Table('QuestionsQuizzApp')
 
-
-# Elements divided in lotes of 25 or less
-batch_size = 10
-batch_items = [items[i:i+batch_size] for i in range(0, len(items), batch_size)]
-
-# Insert each batch in the table using batch_write_item
-def insert_questions_table():
-    for batch in batch_items:
-        response = dynamodb_client.batch_write_item(
-            RequestItems={
-                'QuestionsQuizzApp': [
-                    {'PutRequest': {'Item': item}} for item in batch
-                ]
-            }
-        )
-    return response
-    
 def read_questions():
     response = QuestionsTable.scan()
     all_questions = response['Items']
