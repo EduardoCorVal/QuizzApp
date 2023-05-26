@@ -11,10 +11,12 @@ def test():
     print("TEST SUCCESS")
     return 'TEST SUCCESS'
 
+# Routes to create tables. Run only once
 
 @app.route('/create')
 def root_route():
     dynamodb.create_table_user()
+    dynamodb.create_table_questions()
     return 'Table created'
 
 
