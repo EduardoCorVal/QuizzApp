@@ -1,8 +1,15 @@
+# Final Project: Quiz Application with Microservices
+# Date: 28-Nov-2022
+# Authors:
+#          A01160611 Thursday Rubinstein
+#          A01777771 Stephen Strange
 '''
 This file consists of all the functions that are used to interact with the database.
 It also consists of the code needed to connect to the dynamoDB database using the
 configurations set in config.py file.
 '''
+
+
 
 from boto3 import resource
 import config as config
@@ -89,23 +96,6 @@ def get_top_10_users():
     # Get the top 10 items
     top_10_items = items[:10]
     response['Items'] = top_10_items
-    return response
-
-
-def update_in_user(id, data):
-    response = UserTable.update_item(
-        Key={
-            'id': id
-        },
-        AttributeUpdates={
-            'points': {
-                'Value': data['points'],
-                # available options = DELETE(delete), PUT(set/update), ADD(increment)
-                'Action': 'PUT'
-            }
-        },
-        ReturnValues="UPDATED_NEW"  # returns the new updated values
-    )
     return response
 
 
