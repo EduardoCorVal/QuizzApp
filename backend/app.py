@@ -1,9 +1,14 @@
 # Final Project: Quiz Application with Microservices
 # Date: 28-Nov-2022
 # Authors:
-#          A01160611 Thursday Rubinstein
-#          A01777771 Stephen Strange
+#          A01746664 Eduardo Joel Cortez Valente
+#          A01751587 Paulo Ogando Gulias 
+#          A01745865 José Ángel García Gómez 
+#          A01745419 José Luis Madrigal Sánchez
 
+'''
+This file consists of all routes that are used to interact with the functions in controller.py.
+'''
 
 from flask import Flask, request
 import controller as dynamodb
@@ -94,8 +99,6 @@ def get_user(id):
         'msg': 'Some error occured',
         'response': response
     }
-
-
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000, debug=True)

@@ -1,3 +1,9 @@
+/* Authors */
+// Final Project: Quiz Application with Microservices
+// Date: 28-Nov-2022
+// Authors:
+//          A01746664 Eduardo Joel Cortez Valente
+
 import React, { useState } from "react";
 import { useContext } from "react";
 import { UserContext } from "../App";

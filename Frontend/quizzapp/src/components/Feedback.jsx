@@ -1,10 +1,14 @@
+/* Authors */
+// Final Project: Quiz Application with Microservices
+// Date: 28-Nov-2022
+// Authors:
+//          A01745865 José Ángel García Gómez 
+
 import React, {useContext} from 'react';
 import { UserContext } from '../App';
 import axios from 'axios';
 
-
 import '../styles/Feedback.css';
-
 
 function Feedback(props) {
     const [user, , , , score,] = useContext(UserContext);
