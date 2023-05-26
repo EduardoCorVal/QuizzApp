@@ -1,3 +1,10 @@
+# Final Project: Quiz Application with Microservices
+# Date: 28-Nov-2022
+# Authors:
+#          A01160611 Thursday Rubinstein
+#          A01777771 Stephen Strange
+
+
 from flask import Flask, request
 import controller as dynamodb
 from flask_cors import CORS as CORS
@@ -88,22 +95,6 @@ def get_user(id):
         'response': response
     }
 
-
-@app.route('/user/<int:id>', methods=['PUT'])
-def update_user(id):
-
-    data = request.get_json()
-    response = dynamodb.update_in_user(id, data)
-    if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
-        return {
-            'msg': 'Updated successfully',
-            'ModifiedAttributes': response['Attributes'],
-            'response': response['ResponseMetadata']
-        }
-    return {
-        'msg': 'Some error occured',
-        'response': response
-    }
 
 
 if __name__ == '__main__':
