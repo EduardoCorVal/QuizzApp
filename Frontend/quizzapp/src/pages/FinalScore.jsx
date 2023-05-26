@@ -1,3 +1,12 @@
+/* Authors */
+// Final Project: Quiz Application with Microservices
+// Date: 28-Nov-2022
+// Authors:
+//          A01746664 Eduardo Joel Cortez Valente
+//          A01751587 Paulo Ogando Gulias 
+//          A01745865 José Ángel García Gómez 
+//          A01745419 José Luis Madrigal Sánchez
+
 import React, {useContext, useState} from "react";
 import { UserContext } from "../App";
 import axios from "axios";

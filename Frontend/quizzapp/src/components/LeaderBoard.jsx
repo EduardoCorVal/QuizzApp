@@ -1,3 +1,9 @@
+/* Authors */
+// Final Project: Quiz Application with Microservices
+// Date: 28-Nov-2022
+// Authors:
+//          A01745419 José Luis Madrigal Sánchez
+
 import React from "react";
 import "../styles/LeaderBoard.css";
 import Row from "./Row";

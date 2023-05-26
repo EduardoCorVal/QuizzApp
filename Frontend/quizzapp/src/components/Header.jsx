@@ -1,3 +1,9 @@
+/* Authors */
+// Final Project: Quiz Application with Microservices
+// Date: 28-Nov-2022
+// Authors:
+//          A01751587 Paulo Ogando Gulias 
+
 import React, {useContext} from 'react';
 import '../styles/Header.css';
 import { UserContext } from '../App';

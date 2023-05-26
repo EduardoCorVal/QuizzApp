@@ -1,15 +1,16 @@
 # Final Project: Quiz Application with Microservices
 # Date: 28-Nov-2022
 # Authors:
-#          A01160611 Thursday Rubinstein
-#          A01777771 Stephen Strange
+#          A01746664 Eduardo Joel Cortez Valente
+#          A01751587 Paulo Ogando Gulias 
+#          A01745865 José Ángel García Gómez 
+#          A01745419 José Luis Madrigal Sánchez
+
 '''
 This file consists of all the functions that are used to interact with the database.
 It also consists of the code needed to connect to the dynamoDB database using the
 configurations set in config.py file.
 '''
-
-
 
 from boto3 import resource
 import config as config
@@ -125,6 +126,8 @@ def create_table_questions():
 
 QuestionsTable = dynamodb_client.Table('QuestionsQuizzApp')
 
+# This function already sort the items in the response ramdomly.
+# So, when calling it, the response (the questions needed) is already sorted by random.
 def read_questions():
     response = QuestionsTable.scan()
     all_questions = response['Items']
