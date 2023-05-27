@@ -196,5 +196,32 @@ items = [
         "Choices": {"L": [{"S": "It distributes incoming traffic across multiple servers to improve performance and reliability"}, {"S": "It stores and manages data for the server, reducing the load on server-side resources"}, {"S": "It provides a way for clients to authenticate themselves to the server and access protected resources"}, {"S": "It enables servers to communicate with each other and coordinate their processing."}]},
         "Image": {"S": "26.jpg"},
     },
-    
+    {
+        "id": {"N": "27"},
+        "Sentence": {"S": "What is the purpose of the MVC (Model-View-Controller) pattern?"},
+        "CorrectAnswer": {"S": "To separate the application logic into three main components to facilitate development and maintainability"},
+        "Choices": {"L": [{"S": "To create an attractive and user-friendly interface"}, {"S": "To enable communication between different systems in a distributed architecture"}, {"S": "To organize data in a relational database"}, {"S": "To separate the application logic into three main components to facilitate development and maintainability"}]},
+        "Image": {"S": "27.jpg"}
+    },
+    {
+        "id": {"N": "28"},
+        "Sentence": {"S": "What is horizontal scalability in the context of server infrastructure?"},
+        "CorrectAnswer": {"S": "Adding more servers to the system to handle a larger volume of traffic or workload"},
+        "Choices": {"L": [{"S": "Increasing the processing capacity of an existing server"}, {"S": "Adding more servers to the system to handle a larger volume of traffic or workload"}, {"S": "Optimizing the performance of a server using specific technologies"}, {"S": "Redesigning the system architecture to improve efficiency"}]},
+        "Image": {"S": "28.jpg"}
+    }, 
+    {
+        "id": {"N": "29"},
+        "Sentence": {"S": "What is the difference between a RESTful web service and a SOAP web service?"},
+        "CorrectAnswer": {"S": "RESTful uses HTTP protocols and is lighter and more flexible, while SOAP uses XML and is more rigid and complex"},
+        "Choices": {"L": [{"S": "RESTful uses HTTP protocols and is lighter and more flexible, while SOAP uses XML and is more rigid and complex"}, {"S": "RESTful is more suitable for mobile applications, while SOAP is more suitable for desktop applications"}, {"S": "RESTful only supports GET and POST operations, while SOAP supports more complex operations"}, {"S": "RESTful is an older standard than SOAP"}]},
+        "Image": {"S": "29.jpg"}
+    },
+    {
+        "id": {"N": "30"},
+        "Sentence": {"S": "What is the purpose of the serverless architecture?"},
+        "CorrectAnswer": {"S": "To write functions instead of server implementations to facilitate development and scalability"},
+        "Choices": {"L": [{"S": "To eliminate the need for servers and rely solely on client-side processing"}, {"S": "To centralize all components and resources in a single server"}, {"S": "To provide a flexible and scalable environment for deploying microservices"}, {"S": "To write functions instead of server implementations to facilitate development and scalability"}]},
+        "Image": {"S": "30.jpg"}
+    }
 ]
