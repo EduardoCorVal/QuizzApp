@@ -33,7 +33,6 @@ class Controller ():
         self.app.route('/getAllUsers')(self.get_all_users)
         self.app.route('/getTop10Users')(self.get_top_10_users)
         self.app.route('/user', methods=['POST'])(self.add_user)
-        self.app.route('/user/<id>', methods=['GET'])(self.get_user)
 
 
     def test(self):
@@ -88,19 +87,6 @@ class Controller ():
                 'msg': 'Some error occcured',
                 'response': response
             }
-    
-
-    def get_user(self, id):
-        response = self.UserModel.read_from_user(id)
-        if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
-            if ('Item' in response):
-                return {'Item': response['Item']}
-            return {'msg': 'Item not found!'}
-        return {
-            'msg': 'Some error occured',
-            'response': response
-        }
-
 
 
     def run(self):

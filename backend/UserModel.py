@@ -86,16 +86,6 @@ class UserModel ():
         return response
 
 
-    def read_from_user(self, id):
-        response = self.UserTable.get_item(
-            Key={
-                'id': id,
-            },
-            ProjectionExpression='points'
-        )
-        return response
-
-
     def get_top_10_users(self):
         response = self.UserTable.scan()
         items = response['Items']
