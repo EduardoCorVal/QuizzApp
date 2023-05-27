@@ -7,129 +7,87 @@
 #          A01745419 José Luis Madrigal Sánchez
 
 '''
-This file consists of all the functions that are used to interact with the database.
-It also consists of the code needed to connect to the dynamoDB database using the
-configurations set in config.py file.
+This file consists of the definition of the Controller class wich is in charge of handling the requests and responses of the API.
 '''
 
-from boto3 import resource
+
+# Importing libraries and dependencies 
 import config as config
-import time
-from decimal import Decimal
-from operator import itemgetter
-from poolQuestions import items
-import random
+from flask import Flask, request
+from flask_cors import CORS as CORS
+from QuestionModel import QuestionModel
+from UserModel import UserModel
 
-AWS_ACCESS_KEY_ID = config.AWS_ACCESS_KEY_ID
-AWS_SECRET_ACCESS_KEY = config.AWS_SECRET_ACCESS_KEY
-AWS_SESSION_TOKEN = config.AWS_SESSION_TOKEN
-REGION_NAME = config.REGION_NAME
 
-dynamodb_client = resource(
-    service_name='dynamodb',
-    aws_access_key_id=AWS_ACCESS_KEY_ID,
-    aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-    aws_session_token=AWS_SESSION_TOKEN,
-    region_name=REGION_NAME
-)
+class Controller ():
+    UserModel = UserModel()
+    QuestionModel = QuestionModel()
 
-## Methods related to 'UserQuizzApp' table
+    def __init__(self):
+        self.app = Flask(__name__)
+        CORS(self.app, resources={r"/*": {"origins": "*"}})
+        self.app.route('/')(self.test)
+        # Routes for Question Table
+        self.app.route('/getAllQuestions')(self.get_all_questions)
+        # Routes for User Table
+        self.app.route('/getAllUsers')(self.get_all_users)
+        self.app.route('/getTop10Users')(self.get_top_10_users)
+        self.app.route('/user', methods=['POST'])(self.add_user)
 
-def create_table_user():
-    table = dynamodb_client.create_table(
-        TableName='UserQuizzApp',  
-        KeySchema=[
-            {
-                'AttributeName': 'id',
-                'KeyType': 'HASH'
-            }
-        ],
-        AttributeDefinitions=[
-            {
-                'AttributeName': 'id',
-                'AttributeType': 'N' 
-            }
-        ],
-        ProvisionedThroughput={
-            'ReadCapacityUnits': 10,
-            'WriteCapacityUnits': 10
+
+    def test(self):
+        print("TEST SUCCESS")
+        return 'TEST SUCCESS'
+    
+    def get_all_questions(self):
+        response = self.QuestionModel.read_questions()
+        if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
+            if ('Items' in response):
+                return {'Items': response['Items']}
+            return {'msg': 'Item not found!'}
+        return {
+            'msg': 'Some error occured',
+            'response': response
         }
-    )
-    return table
+    
 
-UserTable = dynamodb_client.Table('UserQuizzApp')
-
-def write_to_user(name, points):
-    id = Decimal(str(time.time()).replace('.', ''))
-    response = UserTable.put_item(
-        Item={
-            # id generet is a timestamp kind of id. 
-            # So, numbers with higher values are newer
-            'id': id, 
-            'name': name,
-            'points': points,
+    def get_all_users(self):
+        response = self.UserModel.read_users()
+        if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
+            if ('Items' in response):
+                return {'Items': response['Items']}
+            return {'msg': 'Item not found!'}
+        return {
+            'msg': 'Some error occured',
+            'response': response
         }
-    )
-    return response
 
 
-def read_from_user(id):
-    response = UserTable.get_item(
-        Key={
-            'id': id,
-        },
-        ProjectionExpression='points'
-    )
-    return response
-
-def read_users():
-    response = UserTable.response = UserTable.scan()
-    return response
-
-
-def get_top_10_users():
-    response = UserTable.scan()
-    items = response['Items']
-    # Sort the items in the list descending by id. (The id itself is a timestamp)
-    items.sort(key=itemgetter('id'), reverse=True)
-    # Sort the items in the list descending by points
-    items.sort(key=itemgetter('points'), reverse=True)
-    # Get the top 10 items
-    top_10_items = items[:10]
-    response['Items'] = top_10_items
-    return response
-
-
-## Methods related to 'QuestionsQuizzApp' table
-
-def create_table_questions():
-    table = dynamodb_client.create_table(
-        TableName='QuestionsQuizzApp',
-        KeySchema=[
-            {
-                'AttributeName': 'id',
-                'KeyType': 'HASH' 
-            }
-        ],
-        AttributeDefinitions=[
-            {
-                'AttributeName': 'id',
-                'AttributeType': 'N'
-            }
-        ],
-        ProvisionedThroughput={
-            'ReadCapacityUnits': 10,
-            'WriteCapacityUnits': 10
+    def get_top_10_users(self):
+        response = self.UserModel.get_top_10_users()
+        if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
+            if ('Items' in response):
+                return {'Items': response['Items']}
+            return {'msg': 'Item not found!'}
+        return {
+            'msg': 'Some error occured',
+            'response': response
         }
-    )
-    return table
 
-QuestionsTable = dynamodb_client.Table('QuestionsQuizzApp')
 
-# This function already sort the items in the response ramdomly.
-# So, when calling it, the response (the questions needed) is already sorted by random.
-def read_questions():
-    response = QuestionsTable.scan()
-    all_questions = response['Items']
-    random.shuffle(all_questions)
-    return response
+    def add_user(self):
+            data = request.get_json()
+            response = self.UserModel.write_to_user(
+                data['name'], data['points'])
+            if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
+                return {
+                    'msg': 'Added successfully',
+                }
+            return {
+                'msg': 'Some error occcured',
+                'response': response
+            }
+
+
+    def run(self):
+        self.app.run(host='127.0.0.1', port=5000, debug=True)
