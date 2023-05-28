@@ -16,6 +16,7 @@ import Header from "../components/Header";
 import LeaderBoard from "../components/LeaderBoard"
 import Subtitle from "../components/Subtitle";
 
+const backendURL = process.env.REACT_APP_BACKEND_URL;
 
 const FinalScore = (props) => {
     const [user, setUser, , , score, setScore] = useContext(UserContext);
@@ -23,7 +24,7 @@ const FinalScore = (props) => {
 
 
     const getBoard = async () => { 
-        const result = await axios.get('http://127.0.0.1:5000/getTop10Users');
+        const result = await axios.get(`${backendURL}/getTop10Users`);
         const newUsers = [];
         result.data.Items.forEach((user) => {
             newUsers.push({name: user.name, score: user.points});

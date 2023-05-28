@@ -9,13 +9,14 @@ import { UserContext } from '../App';
 import axios from 'axios';
 
 import '../styles/Feedback.css';
+const backendURL = process.env.REACT_APP_BACKEND_URL;
 
 function Feedback(props) {
     const [user, , , , score,] = useContext(UserContext);
     const handleOnClick = () => {
         if (props.indexQ - 1 < 0) {
             const postUser = async () => {
-                await axios.post('http://127.0.0.1:5000/user', {
+                await axios.post(`${backendURL}/user`, {
                     name: user,
                     points: score
                 })}
