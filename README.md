@@ -9,11 +9,11 @@ _A a quiz application that allows testing the user's knowledge about design patt
 ## Patterns used, and WHY those patterns were chosen. 
 In terms of the design pattern used, we implemented the MVC (Model-View-Controller) pattern. We chose this pattern because it promotes a clear separation of responsibilities within an application.
 
-**Model**: The model is responsible for handling data and logic. In our case, this functionality resides in the `controller.py` file. It interacts with the database and handles the necessary logic to process the received information.
+**Model**: The model is responsible for handling data and logic. In our case, this functionality resides in the models files `UserModel.py` and `QuestionModel.py`. It interacts with the database and handles the necessary logic to process the received information.
 
 **View**: The view is responsible for displaying the user interface and capturing user input. In our case, it is implemented in the React application (`Frontend/quizzapp`). Here, requests are made to the backend based on the operation or query to be performed. The response is then processed to fit each element within the React components.
 
-**Controller**: The controller acts as an intermediary between the model and the view, controlling the flow of data and interactions. In this case, it is implemented in the `app.py` file. We define the routes and validate the responses received from the controller.
+**Controller**: The controller acts as an intermediary between the model and the view, controlling the flow of data and interactions. In this case, it is implemented in the `controller.py` file. We define the routes and validate the responses received from the controller.
 
 This clear division of responsibilities facilitates code maintenance and modification since changes in one part of the pattern have minimal impact on the other parts.
 
@@ -32,7 +32,7 @@ Before getting started, make sure you have the following requirements:
 * The environment where you will deploy should have at least 2GB of memory.
 * Git installed in the environment.
 * Python 3 installed in the environment.
-* Npm installed in the environment.
+* Npm installed in the environment (Using nvm is recommended).
 * Inbound and outbound connections enabled.
 
 ## Installation and Running the Application
@@ -94,7 +94,13 @@ Done! The backend configuration is ready.
 npm install
 ```
 
-12. Run the application with the following command:
+12. Create a .env and enter the REACT_APP_BACKEND_URL where the frontend will be doing the requests
+
+```env
+REACT_APP_BACKEND_URL=http://backend-host:backend-port
+```
+
+13. Run the application with the following command:
 
 ```shell
 npm start
@@ -109,9 +115,9 @@ Done! The frontend configuration is ready. You can now use the app.
 
 ## Acknowledgments and References
 
-## Deployment in Different Locations
+### Deployment in Different Locations
 
-This project is designed to be deployed in different locations, allowing the backend and frontend to be in separate locations. Only the frontend would need to be modified to update the API endpoint if necessary.
+This project is designed to be deployed in different locations, allowing the backend and frontend to be in separate instances. Only the frontend would need to be modified to update the API endpoint if necessary.
 
 If you decide to deploy the backend and frontend in different locations, follow these steps:
 
