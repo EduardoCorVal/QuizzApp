@@ -15,6 +15,8 @@ import Range from '../components/Range';
 import '../styles/Register.css';
 import axios from "axios";
 
+const backendURL = process.env.REACT_APP_BACKEND_URL;
+
 const Register = (props) => {
 
     const [user, setUser, , setQuestions] = useContext(UserContext);
@@ -30,7 +32,13 @@ const Register = (props) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const getQuestions = await axios.get('http://127.0.0.1:5000/getAllQuestions');
+
+        if (!user) {
+            alert("Please enter a valid username");
+            return;
+        }
+
+        const getQuestions = await axios.get(`${backendURL}/getAllQuestions`);
         let questions = [];
         for (let i = 0; i < numQuestions; i++) {
           questions.push(getQuestions.data.Items[i]);
@@ -45,7 +53,7 @@ const Register = (props) => {
             <Subtitle text="QuizApp" />
             <form className="form" onSubmit={handleSubmit}>
                 <div className="form-element">
-                    <TextInput id="username" name="Input" label="Insert Username" placeholder="Here!" value={user} onChange={handleChangeUsername}/>
+                    <TextInput id="username" name="Input" label="Insert Username" placeholder="Here!" value={user} onChange={handleChangeUsername} maxLength={10}/>
                 </div>
                 <div className="form-element">
                     <Range id="number-questions" name="range" label="How many questions" value={numQuestions} min={1} max={10} step={1} onChange={handleNumQuestionsChange}/>

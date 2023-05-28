@@ -18,6 +18,7 @@ function TextInput(props) {
         value={props.value}
         onChange={props.onChange}
         placeholder={props.placeholder}
+        maxLength={props.maxLength}
       />
     </div>
   );
