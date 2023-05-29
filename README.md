@@ -83,11 +83,16 @@ REGION_NAME = "region_name"
 python app.py
 ```
 
-8. Access the '/create' route in your browser to create the necessary tables in DynamoDB.
+8. Access the '/create' route in your browser to create the necessary tables in DynamoDB (Do this just once).
 
 9. Access the DynamoDB service from AWS and manually insert the "pool of questions" found in the 'poolQuestions.py' file.
 
 Done! The backend configuration is ready.
+
+**Note:** If tou want to run the unitests for each class, just run the following command in the terminal:
+```shell
+python3 -m unittest discover -s tests
+```
 
 ### Frontend Setup
 
@@ -128,6 +133,14 @@ If you decide to deploy the backend and frontend in different locations, follow 
 
 1. Deploy the backend in the desired location, making sure to configure the necessary credentials for the AWS environment.
 
-2. In the frontend code, uppdate the API endpoint to the new location where the backend is deployed. Replace the existing endpoint with the new URL or hostname.
+2. In the frontend code, update the API endpoint to the new location where the backend is deployed. Replace the existing endpoint with the new URL or hostname.
+
+3. Set up inbound rules and allow traffic to the ports 3000 (React) and 5000 (Flask)
 
 By following these steps, you can successfully deploy the backend and frontend in different locations, ensuring they communicate with each other correctly 😊.
+
+### Notes
+
+We deployed our web application in the following link 'http://44.216.61.126:3000/'. But since we are working in a learner lab, we can't keep running the server for a long period of time. 
+
+However, you can see a demo of the app running in the following link: https://youtu.be/8UzSEpN2K8k
