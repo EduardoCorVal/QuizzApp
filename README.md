@@ -23,7 +23,12 @@ Moreover, due to the separation of responsibilities, it is easier to test the di
 
 Lastly, we would like to highlight how following this model facilitated our collaborative work. We were able to work on different aspects of the application simultaneously without interfering with each other's work. The clear separation of concerns provided a smooth collaborative workflow.
 
-🔗 Update the explanation of the diagram above to reflect the chosen patterns.
+As for **the UML diagram**, there are various classes that perform specific functions so that together the functionalities of our application can be offered. 
+- Initially, there is a class for the DBManager, which allows establishing the connection to the stored data in DynamoDB, in order to apply operations that generate the appropriate information for the app. 
+- On the other hand, there are the User and MCQuestion classes, which contain as such the fields that are required to update the database, so they act in the Model, since they have the necessary methods to create a user, give the questions to be answered and the final ranking, and these things are related too with the Controller, because we can get the exact data that we need. 
+- Finally, the App class is related to the View, since it makes use of the methods of the Model classes to generate the specific information for a user's game, which is used to display in the graphical interface, so it also has the necessary methods to render the frontend’s components. 
+
+So, the proper division of workloads _allows our application to have a high level of availability and performance_, since users register, see their own information such as their name and score, and access a global data source to interact with our app, in order to obtain their questions, their answers and the leaderboard.
 
 ## Prerequisites
 Before getting started, make sure you have the following requirements:
